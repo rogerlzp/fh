@@ -1,0 +1,25 @@
+<?php
+
+return array(
+		'board' => '画册',
+		'submitted' => 'Submitted :timeago :categories',
+		'are_you_sure' => '确认',
+		'cancel' => '取消',
+		'creating_new_board' => '创建画册',
+		'update_trick' => 'Update Trick',
+		'delete' => '删除',
+		'title' => '标题',
+		'no_tricks_found' => 'oops， 没有找到',
+		'tag_trick_placeholder' => 'Tag this trick',
+		'categorize_trick_placeholder' => '给trick分类',
+		'title_placeholder' => '给画册起个名字',
+		'description' => '描述',
+		'remove_board' => '删除画册',
+		'board_description_placeholder' => '画册介绍',
+		'trick_code' => 'Trick code:',
+		'save_board' => '创建',
+		'editing_trick' => 'Editing trick',
+		'errors_while_editing' => 'There were errors while editing this trick:',
+		'errors_while_creating' => '创建画册错误',
+		'are_you_sure_text' => 'Are you sure you want to remove this trick?',
+);

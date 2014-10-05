@@ -1,0 +1,28 @@
+<?php 
+
+return array(
+	'trick' => 'Trick',
+	'submitted' => 'Submitted :timeago :categories',
+	'are_you_sure' => '确定?',
+	'cancel' => '取消',
+	'creating_new_product' => '创建新的产品',
+	'update_trick' => 'Update Trick',
+	'delete' => '删除',
+	'name' => '名称',
+	'sku'  => 'SKU',
+	'stock' => '数量',
+	'enabled' => '有效',
+	'no_tricks_found' => '没有找到',
+	'tag_trick_placeholder' => '添加标签',
+	'categorize_trick_placeholder' => 'Choose Categories for this trick',
+	'name_placeholder' => '产品名称',
+	'description' => '描述',
+	'remove_trick' => '删除',
+	'products_description_placeholder' => '详细描述',
+	'trick_code' => 'Trick code:',
+	'save_trick' => '保存',
+	'editing_trick' => '编辑',
+	'errors_while_editing' => 'There were errors while editing this trick:',
+	'errors_while_creating' => '新建产品失败:',
+	'are_you_sure_text' => 'Are you sure you want to remove this trick?',
+);
