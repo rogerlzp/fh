@@ -31,6 +31,17 @@ Route::group(['prefix'=>'admin', 'before'=>'auth', 'namespace' => 'Controllers\A
     'getView'  => 'admin.category2.view'
     		]);
     
+    
+    Route::controller('permission', 'PermissionController', [
+    'getIndex' => 'admin.permission.index',
+    'getView'  => 'admin.permission.view'
+    		]);
+    
+    Route::controller('role', 'RoleController', [
+    'getIndex' => 'admin.role.index',
+    'getView'  => 'admin.role.view'
+    		]);
+    
   
     Route::controller('login', 'AdminController', [
     'getIndex' => 'admin.admin.index',
@@ -67,8 +78,9 @@ Route::group(['prefix'=>'admin', 'before'=>'auth', 'namespace' => 'Controllers\A
     Route::get('users/create',  ['as'=>'admin.user.create', 'uses' => 'UsersController@getCreate']);
     Route::post('users/create', 'UsersController@postCreate');
     
-    Route::get('users/index/{id}',  ['as'=>'admin.users.index', 'uses' => 'UsersController@getIndex']);
-
+    Route::get('users/index',  ['as'=>'admin.users.index', 'uses' => 'UsersController@getIndex']);
+    Route::get('users/{id}',  ['as'=>'admin.users.view', 'uses' => 'UsersController@getView']);
+    Route::post('users/{id}',  ['as'=>'admin.users.view', 'uses' => 'UsersController@postView']);
     
 
 });
@@ -103,6 +115,9 @@ Route::group([ 'namespace' => 'Controllers' ], function () {
 
     # Search routes
     Route::get('search', 'SearchController@getIndex');
+    
+    # Search routes
+    Route::get('search/user', [ 'as' => 'search.users', 'uses' => 'SearchController@getUserIndex' ] );
 
     # Sitemap route
     Route::get('sitemap', 'SitemapController@getIndex');

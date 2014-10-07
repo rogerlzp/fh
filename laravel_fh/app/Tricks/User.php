@@ -194,6 +194,10 @@ class User extends Model implements UserInterface, RemindableInterface
 	}
 	
 	
+	public function roles()
+	{	
+		return $this->belongsToMany('Tricks\Role', 'assigned_roles');
+	}
 	
 	
 }

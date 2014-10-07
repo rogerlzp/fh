@@ -6,9 +6,11 @@ use Tricks\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Tricks\Services\Forms\SettingsForm;
 use Tricks\Services\Forms\RegistrationForm;
+use Tricks\Services\Forms\UserForm;
 use Tricks\Exceptions\UserNotFoundException;
 use Tricks\Repositories\UserRepositoryInterface;
 use League\OAuth2\Client\Provider\User as OAuthUser;
@@ -190,5 +192,106 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     	return Auth::user()->follows->where('follow_id', '=', $id);
     }
     
+
+    
+    
+    /**
+     * Get a list of roles ids that are associated with the given role.
+     *
+     * @param  \Tricks\User $user
+     * @return array
+     */
+    public function listRolesForUser(User $user)
+    {
+    	return $user->roles->lists('id');
+    }
+    
+    /**
+     * Find a user by id.
+     *
+     * @param  mixed  $id
+     * @return \Tricks\User
+     */
+    public function findById($id)
+    {
+    	return $this->model->find($id);
+    }
+    
+    /**
+     * Update the specified user in the database.
+     *
+     * @param  mixed  $id
+     * @param  array  $data
+     * @return \Tricks\User
+     */
+    public function update($id, array $data)
+    {
+    	$user = $this->findById($id);
+    
+    //	$user->username = $data['username'];
+    	$user->email    = e($data['email']);
+    	$user->save();
+    	
+    	$profile = $user->profile;
+    	Log::info($profile);
+    	$profile->name = $data['username'];
+    	Log::info( $data['username']);
+    	$profile->company = $data['company'];
+    	$profile->department = $data['department'];
+    	$profile->title = $data['title'];
+    	$profile->phone = $data['phone'];
+    	$profile->address = $data['address'];
+    	$profile->save();
+    	Log::info($profile);
+    	
+    	
+    	if(in_array("roles", $data))  {
+    		$user->roles()->sync($data['roles']);
+    	}
+    	
+    	return $user;
+    }
+    
+    /**
+     * Get the user create/update form service.
+     *
+     * @return \Tricks\Services\Forms\UserForm
+     */
+    public function getForm()
+    {
+    	return new UserForm;
+    }
+    
+    /**
+     * Find all users that match the given search term.
+     *
+     * @param  string $term
+     * @param  integer $perPage
+     * @return \Illuminate\Pagination\Paginator|\Tricks\User[]
+     * 
+     */
+    public function searchByTermPaginated($term, $perPage = 12)
+    {
+    	$users =  $this->model
+    	->orWhere('username', 'LIKE', '%'.$term.'%')
+    	->orWhere('email', 'LIKE', '%'.$term.'%')
+    	->orWhere('mobile', 'LIKE', '%'.$term.'%')
+    	->orWhereHas('profile', function ($query) use ($term) {
+    		$query->where('name', 'LIKE', '%' . $term . '%')
+    		->orWhere('title', 'LIKE', '%' . $term . '%');
+    	//	->orWhere('company', 'LIKE', '%' . $term . '%')
+    	//	->orWhere('department', 'LIKE', '%' . $term . '%')
+    		//->orWhere('title', 'LIKE', '%' . $term . '%');
+    	//	->orWhere('address', 'LIKE', '%' . $term . '%'); 
+    	})
+    	
+    	->orWhereHas('roles', function ($query) use ($term) {
+    		$query->where('name', 'LIKE', '%' . $term . '%');
+    	})
+    	->orderBy('created_at', 'desc')
+    	->paginate($perPage);
+    
+    	return $users;
+    }
     
 }

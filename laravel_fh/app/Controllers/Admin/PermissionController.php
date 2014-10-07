@@ -36,7 +36,7 @@ class PermissionController extends BaseController
     {
         $permissions = $this->permissions->findAll('created_at', 'asc');
 
-        $this->view('admin.permission.list', compact('$permissions'));
+        $this->view('admin.permission.list', compact('permissions'));
     }
 
     /**

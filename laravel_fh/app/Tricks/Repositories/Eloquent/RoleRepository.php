@@ -5,9 +5,9 @@ namespace Tricks\Repositories\Eloquent;
 use Tricks\Role;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Tricks\Services\Forms\PermissionForm;
+use Tricks\Services\Forms\RoleForm;
 use Tricks\Exceptions\TagNotFoundException;
-use Tricks\Repositories\PermissionRepositoryInterface;
+use Tricks\Repositories\RoleRepositoryInterface;
 
 class RoleRepository extends AbstractRepository implements RoleRepositoryInterface
 {
@@ -93,8 +93,8 @@ class RoleRepository extends AbstractRepository implements RoleRepositoryInterfa
 
         $role->name = $data['name'];
 
-
         $role->save();
+        $role->permissions()->sync($data['permissions']);
 
         return $role;
     }
@@ -121,5 +121,16 @@ class RoleRepository extends AbstractRepository implements RoleRepositoryInterfa
     public function getForm()
     {
         return new RoleForm;
+    }
+    
+    /**
+     * Get a list of tag ids that are associated with the given trick.
+     *
+     * @param  \Tricks\Trick $trick
+     * @return array
+     */
+    public function listPermissionIdsForRole(Role $role)
+    {
+    	return $role->permissions->lists('id');
     }
 }
