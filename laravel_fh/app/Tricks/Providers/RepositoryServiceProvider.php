@@ -97,5 +97,26 @@ class RepositoryServiceProvider extends ServiceProvider
         		'Tricks\Repositories\RoleRepositoryInterface',
         		'Tricks\Repositories\Eloquent\RoleRepository'
         );
+        
+        
+        $this->app->bind(
+        		'Tricks\Repositories\StockRepositoryInterface',
+        		'Tricks\Repositories\Eloquent\StockRepository'
+        );
+        
+        $this->app->bind(
+        		'Tricks\Repositories\PortfolioRepositoryInterface',
+        		'Tricks\Repositories\Eloquent\PortfolioRepository'
+        );
+        
+        $this->app->bind(
+        		'Tricks\Repositories\PortfolioItemRepositoryInterface',
+        		'Tricks\Repositories\Eloquent\PortfolioItemRepository'
+        );
+        
+        $this->app->bind(
+        		'Tricks\Repositories\AccountRepositoryInterface',
+        		'Tricks\Repositories\Eloquent\AccountRepository'
+        );
     }
 }

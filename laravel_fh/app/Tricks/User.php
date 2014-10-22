@@ -199,5 +199,25 @@ class User extends Model implements UserInterface, RemindableInterface
 		return $this->belongsToMany('Tricks\Role', 'assigned_roles');
 	}
 	
+	public function stocks()
+	{
+		return $this->belongsToMany('Tricks\Stock', 'user_stock_follow');
+	}
+	
+	public function portfolios()
+	{
+		return $this->belongsToMany('Tricks\Portfolio', 'user_portfolio_follow');
+	}
+	
+/**
+	 * Query the user portfolio.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function myportfolio()
+	{
+		return $this->hasOne('Tricks\Portfolio');
+	}
+	
 	
 }

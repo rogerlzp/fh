@@ -4,6 +4,7 @@ namespace Tricks\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Tricks\Services\Upload\ImageUploadService;
+use Tricks\Services\Upload\Test2;
 
 class UploadServiceProvider extends ServiceProvider
 {
@@ -17,5 +18,6 @@ class UploadServiceProvider extends ServiceProvider
         $this->app['upload.image'] = $this->app->share(function ($app) {
             return new ImageUploadService($app['files']);
         });
+        
     }
 }

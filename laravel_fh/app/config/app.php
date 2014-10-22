@@ -65,7 +65,7 @@ return array(
     |
     */
 
-    'key' => 'Your App Key Here',
+    'key' => 'ZyopzaSatsnJgXP7TLJq4nQRgutNhjjO',
 
     /*
     |--------------------------------------------------------------------------
@@ -105,7 +105,7 @@ return array(
         'Illuminate\Translation\TranslationServiceProvider',
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
-        // 'Illuminate\Workbench\WorkbenchServiceProvider',
+      //   'Illuminate\Workbench\WorkbenchServiceProvider',
 
         'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
         'Intervention\Image\ImageServiceProvider',
@@ -115,12 +115,17 @@ return array(
         'Tricks\Providers\RepositoryServiceProvider',
         'Tricks\Providers\SocialServiceProvider',
         'Tricks\Providers\UploadServiceProvider',
+    		'Tricks\Providers\Wechat2ServiceProvider',
         'Tricks\Providers\NavigationServiceProvider',
         'Tricks\Providers\SitemapServiceProvider',
         'Tricks\Providers\EventServiceProvider',
-    		
+    	'Tricks\Providers\WechatServiceProvider',
+  		
     	'Zizaco\Confide\ServiceProvider',
     	'Zizaco\Entrust\EntrustServiceProvider',
+    	
+    //	'Cooper\Wechat\WechatServiceProvider',
+    	//'Roger\Wechat\WechatServiceProvider',
     ),
 
     /*
@@ -192,11 +197,14 @@ return array(
         'Image'          => 'Intervention\Image\Facades\Image',
         'Gravatar'       => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
         'ImageUpload'    => 'Tricks\Facades\ImageUpload',
+    	'Wechat2'    => 'Tricks\Facades\Wechat2',
+    	'WechatServer'   => 'Tricks\Facades\WechatServer',
         'Navigation'     => 'Tricks\Facades\Navigation',
         'Disqus'         => 'Tricks\Facades\Disqus',
     	
     	'Entrust'        => 'Zizaco\Entrust\EntrustFacade',
     	'Confide'        => 'Zizaco\Confide\Facade',
+    	
     ),
 
 );

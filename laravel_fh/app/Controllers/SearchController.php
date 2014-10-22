@@ -5,6 +5,8 @@ namespace Controllers;
 use Illuminate\Support\Facades\Input;
 use Tricks\Repositories\TrickRepositoryInterface;
 use Tricks\Repositories\UserRepositoryInterface;
+use Tricks\Repositories\StockRepositoryInterface;
+use Tricks\Repositories\PortfolioRepositoryInterface;
 
 class SearchController extends BaseController
 {
@@ -21,6 +23,20 @@ class SearchController extends BaseController
      * @var \Tricks\Repositories\UserRepositoryInterface
      */
     protected $users;
+    
+    /**
+     * Stock repository.
+     *
+     * @var \Tricks\Repositories\StockRepositoryInterface
+     */
+    protected $stock;
+    
+    /**
+     * Portfolio repository.
+     *
+     * @var \Tricks\Repositories\PortfolioRepositoryInterface
+     */
+    protected $portfolio;
 
     /**
      * Create a new SearchController instance.
@@ -28,12 +44,16 @@ class SearchController extends BaseController
      * @param  \Tricks\Repositories\TrickRepositoryInterface  $tricks
      * @return void
      */
-    public function __construct(TrickRepositoryInterface $tricks, UserRepositoryInterface $users)
+    public function __construct(TrickRepositoryInterface $tricks, 
+    		UserRepositoryInterface $users, StockRepositoryInterface $stock,
+    		PortfolioRepositoryInterface $portfolio)
     {
         parent::__construct();
 
         $this->tricks = $tricks;
         $this->users = $users;
+        $this->stock = $stock;
+        $this->portfolio = $portfolio;
     }
 
     /**
@@ -70,5 +90,39 @@ class SearchController extends BaseController
     	$this->view('admin.users.list', compact('users','term'));
     }
     
+    
+    /**
+     * Show the search results page.
+     *
+     * @return \Response
+     */
+    public function getStockIndex()
+    {
+    	$term   = e(Input::get('q'));
+    	$stock = null;
+    
+    	if (! empty($term)) {
+    		$stocks = $this->stock->searchByTermPaginated($term, 12);
+    	}
+    
+    	$this->view('stocks.search', compact('stocks'));
+    }
+    
+    /**
+     * Show the search results page.
+     *
+     * @return \Response
+     */
+    public function getPortfolioIndex()
+    {
+    	$term   = e(Input::get('q'));
+    	$portfolios = null;
+    
+    	if (! empty($term)) {
+    		$portfolios = $this->portfolio->searchByTermPaginated($term, 12);
+    	}
+    
+    	$this->view('portfolio.search', compact('portfolios'));
+    }
     
 }

@@ -8,22 +8,17 @@ return array(
 		array(
 					'label' => '首页',
 					'route' => 'home.index',
-					'active' => array('home*')
+					'active' => array('/','home*')
 			),
 		array(
 			'label' => '活动',
 			'route' => 'browse.recent',
-			'active' => array('/','popular','comments')
+			'active' => array('popular','comments')
 		),
 		array(
-			'label' => '分类',
+			'label' => '学习',
 			'route' => 'browse.categories',
 			'active' => array('categories*')
-		),
-		array(
-			'label' => '标签',
-			'route' => 'browse.tags',
-			'active' => array('tags*')
 		),
 		array(
 				'label' => '专栏',
@@ -31,7 +26,26 @@ return array(
 				'active' => array('product*'),
 				// 'logged_in' => true
 		),
+		array(
+					'label' => '自选股',
+					'route' => 'stock.show',
+					'active' => array('stock*'),
+					// 'logged_in' => true
+			),
+			array(
+					'label' => '持仓',
+					'route' => 'portfolio.myshow',
+					'active' => array('portfolio*'),
+					// 'logged_in' => true
+			),
+			array(
+					'label' => '组合超市',
+					'route' => 'portfolio.all',
+					'active' => array('portfolio*'),
+					// 'logged_in' => true
+			),
 	),
+		
 
 	'browse' => array(
 		array(

@@ -94,7 +94,7 @@ Route::group(['prefix'=>'admin', 'before'=>'auth', 'namespace' => 'Controllers\A
 
 Route::group([ 'namespace' => 'Controllers' ], function () {
     # Home routes
-    Route::get('/', [ 'as' => 'browse.recent', 'uses' => 'BrowseController@getBrowseRecent' ]);
+    Route::get('browse/recent', [ 'as' => 'browse.recent', 'uses' => 'BrowseController@getBrowseRecent' ]);
     Route::get('popular', [ 'as' => 'browse.popular', 'uses' => 'BrowseController@getBrowsePopular' ]);
     Route::get('comments', [ 'as' => 'browse.comments', 'uses' => 'BrowseController@getBrowseComments' ]);
     Route::get('about', [ 'as' => 'about', 'uses' => 'HomeController@getAbout' ]);
@@ -118,7 +118,9 @@ Route::group([ 'namespace' => 'Controllers' ], function () {
     
     # Search routes
     Route::get('search/user', [ 'as' => 'search.users', 'uses' => 'SearchController@getUserIndex' ] );
-
+    Route::get('search/stock', [ 'as' => 'search.stocks', 'uses' => 'SearchController@getStockIndex' ] );
+    Route::get('search/portfolio', [ 'as' => 'search.portfolios', 'uses' => 'SearchController@getPortfolioIndex' ] );
+    
     # Sitemap route
     Route::get('sitemap', 'SitemapController@getIndex');
     Route::get('sitemap.xml', 'SitemapController@getIndex');
@@ -158,6 +160,7 @@ Route::group([ 'namespace' => 'Controllers' ], function () {
     # This route will match the user by username to display their public profile
     # (if we want people to see who favorites and who posts what)
     Route::get('user/{user}', [ 'as' => 'user.profile', 'uses' => 'UserController@getPublic' ]);
+   // Route::get('user/{id}', [ 'as' => 'user.profile', 'uses' => 'UserController@getPublic' ]);
     
     # Board creation route
     Route::get('user/board/new', [ 'as' => 'board.new', 'uses' => 'UserBoardController@getNew' ]);
@@ -219,12 +222,59 @@ Route::group([ 'namespace' => 'Controllers' ], function () {
    # Add Test route
    Route::get('user/test1', ['as' => 'user.test1', 'uses' => 'TestController@testComment']);
    Route::get('user/test2', ['as' => 'user.test1', 'uses' => 'TestController@testProductInfo']);
+   Route::get('test/stock', ['as' => 'user.test1', 'uses' => 'TestController@stockInfo']);
+
+   
    Route::get('user/tfollow1', ['as' => 'user.test_follow', 'uses' => 'TestController@testUserFollow']);
    
    
    
    # Home Route
    Route::get('home', [ 'as' => 'home.index', 'uses' => 'HomeController@getIndex' ]);
+   Route::get('/', [ 'as' => 'home.index', 'uses' => 'HomeController@getIndex' ]);
    
+  // Route::resource('api/v1', 'WeixinController');
+   
+   Route::get('api/v1', array(
+   'as'     => 'wechat.test',
+   'uses'   => 'WechatController@test',
+   )); 
+   
+   
+
+   # Stock list
+   Route::get('stock/show', [ 'as' => 'stock.show', 'uses' => 'StockController@getIndex' ]);
     
+   # Stock id
+   Route::get('stock/{id}', [ 'as' => 'stock.single', 'uses' => 'StockController@getSingle' ]);
+  
+   # Stock list
+   Route::post('add/stock', [ 'as' => 'stock.add', 'uses' => 'StockController@postAdd' ]);
+   
+   # Stock buy
+   Route::post('stock/buy/{code}', [ 'as' => 'stock.buy', 'uses' => 'StockController@postBuy' ]);
+   Route::get('stock/buy/{code}', [ 'as' => 'stock.buy', 'uses' => 'StockController@getBuy' ]);
+    
+    
+
+   # Portfolio list
+   Route::get('portfolio/myshow', [ 'as' => 'portfolio.myshow', 'uses' => 'PortfolioController@getProfileMyShow' ]);
+   Route::get('portfolio/all', [ 'as' => 'portfolio.all', 'uses' => 'PortfolioController@getIndex' ]);
+   Route::get('portfolio/create', [ 'as' => 'portfolio.create', 'uses' => 'PortfolioController@getCreate' ]);
+   Route::post('portfolio/create', [ 'as' => 'portfolio.create', 'uses' => 'PortfolioController@postCreate' ]);
+
+   Route::get('portfolio/pmyshow', [ 'as' => 'portfolio.profile_showmy', 'uses' => 'PortfolioController@getProfileMyShow' ]);
+   Route::get('portfolio/show', [ 'as' => 'portfolio.profile_showbuy', 'uses' => 'PortfolioController@getProfileBuyShow' ]);
+   Route::get('portfolio/show', [ 'as' => 'portfolio.profile_showwatch', 'uses' => 'PortfolioController@getProfileWatchShow' ]);
+   
+   // show single portfolio
+   Route::get('portfolio/{id}', [ 'as' => 'portfolio.show_single', 'uses' => 'PortfolioController@getSingleShow' ]);
+    
+   # Create account
+   Route::post('account/create', [ 'as' => 'account.create', 'uses' => 'PortfolioController@postCreateAccount' ]);
+   
 });
+
+
+
+

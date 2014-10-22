@@ -1,16 +1,18 @@
 html,
 body {
  height: 100%;
+ width: 80%;
  /* The html and body elements cannot have any padding or margin. */
 }
 
 /* Wrapper for page content to push down footer */
 #wrap {
- min-height: 100%;
+# min-height: 100%;
+ width: 900px;
  height: auto !important;
- height: 100%;
+# height: 100%;
  /* Negative indent footer by its height */
- margin: 0 auto -60px;
+ margin: 0 auto ;
  /* Pad bottom by footer height */
  padding: 0 0 60px;
 }
@@ -209,3 +211,5 @@ body {
   background-color: #8AE287;
   border-color: #3BB65C;
 }
+
+

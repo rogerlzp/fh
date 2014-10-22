@@ -42,9 +42,15 @@
     <body>
         <div id="wrap">
             @include('partials.navigation')
-            @yield('content')
+            <div class="second_wrap">
+            	@yield('content')
+            </div>
+                    
+                    
         </div>
 
+
+        
         @include('partials.footer')
 
         <script>

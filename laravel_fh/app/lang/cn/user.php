@@ -20,6 +20,7 @@ return array(
 	'confirm_password' => '确认密码',
 	'password' => '密码',
 	'new_password' => '新的密码',
+	'modify_password' => '修改密码',
 	'uploading' => '上传中',
 	'username' => '用户名',
 	'user_settings' => '用户设置',
@@ -30,5 +31,7 @@ return array(
 	'profile_picture' => 'Profile Picture',
 	'settings_updated' => '设置已经更新',
 	'email' => '邮箱',
-	'github_user_already_taken' => 'Your Github username has already been taken on this site, please choose a different username',
+	'center' => '个人中心',
+	'info'   =>  '我的资料',
+	'account_manage' => '账户管理',
 );
